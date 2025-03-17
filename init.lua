@@ -8,7 +8,7 @@ Plug('aeromaki/miku-black.nvim')
 Plug('nvim-lualine/lualine.nvim')
 
 Plug('neovim/nvim-lspconfig')
-Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
+Plug('nvim-treesitter/nvim-treesitter', { ['do'] = 'TSUpdate' })
 Plug('hrsh7th/nvim-cmp')
 Plug('hrsh7th/cmp-nvim-lsp')
 
@@ -122,6 +122,7 @@ local lspconfig = require('lspconfig')
 lspconfig.lua_ls.setup(lspSetup)
 lspconfig.vimls.setup(lspSetup)
 lspconfig.pyright.setup(lspSetup)
+lspconfig.ts_ls.setup(lspSetup)
 lspconfig.rust_analyzer.setup(lspSetup)
 
 
