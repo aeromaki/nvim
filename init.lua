@@ -3,10 +3,12 @@ local Plug = vim.fn['plug#']
 
 vim.call('plug#begin')
 
-Plug('nvim-lualine/lualine.nvim')
-Plug('neovim/nvim-lspconfig')
 Plug('rktjmp/lush.nvim')
 Plug('aeromaki/miku-black.nvim')
+Plug('nvim-lualine/lualine.nvim')
+
+Plug('neovim/nvim-lspconfig')
+Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
 
 vim.call('plug#end')
 
@@ -65,9 +67,19 @@ require('lualine').setup({
   }
 })
 
-local lspconfig = require('lspconfig')
-lspconfig.pyright.setup({
+
+require('nvim-treesitter.configs').setup({
+  ensure_installed = 'all',
+  sync_install = false,
+  auto_install = true,
+  highlight = {
+    enable = true
+  },
+  additional_vim_regex_highlighting = false
 })
+
+local lspconfig = require('lspconfig')
+lspconfig.pyright.setup({})
 
 vim.opt.number = true
 vim.opt.tabstop = 2
