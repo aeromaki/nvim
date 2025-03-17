@@ -1,11 +1,14 @@
 local vim = vim
 local Plug = vim.fn['plug#']
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 vim.call('plug#begin')
 
 Plug('rktjmp/lush.nvim')
 Plug('aeromaki/miku-black.nvim')
 Plug('nvim-lualine/lualine.nvim')
+Plug('nvim-tree/nvim-tree.lua')
 
 Plug('neovim/nvim-lspconfig')
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = 'TSUpdate' })
@@ -18,9 +21,6 @@ vim.call('plug#end')
 
 
 vim.cmd('colorscheme miku-black')
-
-
-
 
 local colors = {
   white = '#d9d9d9',
@@ -72,6 +72,29 @@ require('lualine').setup({
   }
 })
 
+require('nvim-tree').setup({
+  sort = {
+    sorter = 'case_sensitive'
+  },
+  filters = {
+    dotfiles = false
+  },
+  renderer = {
+    icons = {
+      show = {
+        file = false,
+        folder = false,
+        folder_arrow = false,
+        git = false,
+        modified = false,
+        hidden = false,
+        diagnostics = false,
+        bookmarks = false
+      }
+    }
+  }
+})
+
 
 
 
@@ -110,7 +133,7 @@ cmp.setup({
     ['<CR>'] = cmp_f(cmp.mapping.confirm({ select = true }))
   }),
   sources = {
-    { name = 'nvim_lsp'}
+    { name = 'nvim_lsp' }
   }
 })
 
@@ -145,3 +168,4 @@ vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>q', '<Esc>:tabnew<CR>')
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>r', '<Esc>:tabclose<CR>')
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>w', '<Esc>:tabprevious<CR>')
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>e', '<Esc>:tabnext<CR>')
+vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>t', '<Esc>:NvimTreeToggle<CR>')
