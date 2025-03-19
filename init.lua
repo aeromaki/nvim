@@ -15,6 +15,8 @@ Plug('nvim-treesitter/nvim-treesitter', { ['do'] = 'TSUpdate' })
 Plug('hrsh7th/nvim-cmp')
 Plug('hrsh7th/cmp-nvim-lsp')
 
+Plug('m4xshen/autoclose.nvim')
+
 vim.call('plug#end')
 
 
@@ -68,7 +70,12 @@ require('lualine').setup({
     section_separators = { left = '', right = '' }
   },
   sections = {
-    lualine_b = { 'branch', 'diagnostics' }
+    lualine_b = { 'branch', 'diagnostics' },
+    lualine_c = {{
+      'filename',
+      file_status = true,
+      path = 2
+    }}
   }
 })
 
@@ -147,6 +154,15 @@ lspconfig.vimls.setup(lspSetup)
 lspconfig.pyright.setup(lspSetup)
 lspconfig.ts_ls.setup(lspSetup)
 lspconfig.rust_analyzer.setup(lspSetup)
+
+
+
+
+require('autoclose').setup({
+  options = {
+    pair_spaces = true
+  }
+})
 
 
 
