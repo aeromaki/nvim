@@ -6,50 +6,53 @@ vim.g.loaded_netrwPlugin = 1
 vim.call('plug#begin')
 
 Plug('rktjmp/lush.nvim')
-Plug('aeromaki/miku-black.nvim')
+Plug('aeromaki/TripleBaka.nvim')
 Plug('nvim-lualine/lualine.nvim')
 Plug('nvim-tree/nvim-tree.lua')
 
 Plug('neovim/nvim-lspconfig')
-Plug('nvim-treesitter/nvim-treesitter', { ['do'] = 'TSUpdate' })
+Plug('nvim-treesitter/nvim-treesitter')
 Plug('hrsh7th/nvim-cmp')
 Plug('hrsh7th/cmp-nvim-lsp')
 
 Plug('m4xshen/autoclose.nvim')
+Plug('famiu/bufdelete.nvim')
 
 vim.call('plug#end')
 
 
 
 
-vim.cmd('colorscheme miku-black')
+vim.cmd('colorscheme TripleBaka')
 
 local colors = {
-  white = '#d9d9d9',
-  black = '#101010',
+  white = '#ffffff',
+  black = '#323232',
+  lightgray = '#eeeeee',
+  gray = '#dddddd',
   red = '#e24673',
-  green = '#13868c',
+  yellow = '#ffd543',
   blue = '#39c5bb'
 }
 
-local lualine_b = { bg = colors.black, fg = colors.white }
-local lualine_c = { bg = colors.black, fg = colors.white }
+local lualine_b = { bg = colors.lightgray, fg = colors.black }
+local lualine_c = { bg = colors.gray, fg = colors.black }
 
 local theme = {
   normal = {
-    a = { bg = colors.green, fg = colors.black, gui = 'bold' },
+    a = { bg = colors.blue, fg = colors.black, gui = 'bold' },
     b = lualine_b, c = lualine_c
   },
   insert = {
-    a = { bg = colors.blue, fg = colors.black, gui = 'bold' },
+    a = { bg = colors.yellow, fg = colors.black, gui = 'bold' },
     b = lualine_b, c = lualine_c
   },
   visual = {
-    a = { bg = colors.green, fg = colors.black, gui = 'bold' },
+    a = { bg = colors.blue, fg = colors.black, gui = 'bold' },
     b = lualine_b, c = lualine_c
   },
   replace = {
-    a = { bg = colors.blue, fg = colors.black, gui = 'bold' },
+    a = { bg = colors.yellow, fg = colors.black, gui = 'bold' },
     b = lualine_b, c = lualine_c
   },
   command = {
@@ -57,7 +60,7 @@ local theme = {
     b = lualine_b, c = lualine_c
   },
   inactive = {
-    a = { bg = colors.green, fg = colors.black, gui = 'bold' },
+    a = { bg = colors.red, fg = colors.black, gui = 'bold' },
     b = lualine_b, c = lualine_c
   },
 }
@@ -67,15 +70,30 @@ require('lualine').setup({
     icons_enabled = false,
     theme = theme,
     component_separators = { left = '', right = '' },
-    section_separators = { left = '', right = '' }
+    section_separators = { left = '', right = '' },
+    globalstatus = true,
+    --always_divide_middle = false
   },
   sections = {
-    lualine_b = { 'branch', 'diagnostics' },
+    lualine_b = {
+      'branch',
+      --'diff'
+    },
     lualine_c = {{
       'filename',
       file_status = true,
       path = 2
-    }}
+    }},
+    lualine_x = {
+      'filetype'
+    },
+    lualine_y = {
+      'diagnostics',
+      --'lsp_status'
+    },
+    lualine_z = {
+      'location'
+    }
   }
 })
 
@@ -174,6 +192,7 @@ vim.opt.expandtab = true
 vim.opt.cursorline = true
 vim.opt.scl = 'no'
 vim.opt.laststatus = 3
+vim.opt.clipboard = "unnamedplus"
 
 
 
@@ -185,3 +204,9 @@ vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>r', '<Esc>:tabclose<CR>')
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>w', '<Esc>:tabprevious<CR>')
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>e', '<Esc>:tabnext<CR>')
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>t', '<Esc>:NvimTreeToggle<CR>')
+vim.cmd('cnoreabbrev W w')
+vim.cmd('cnoreabbrev bdd bd')
+vim.cmd('cnoreabbrev bd Bd')
+vim.cmd('cnoreabbrev bww bw')
+vim.cmd('cnoreabbrev bw Bw')
+
