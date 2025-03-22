@@ -14,6 +14,7 @@ Plug('neovim/nvim-lspconfig')
 Plug('nvim-treesitter/nvim-treesitter')
 Plug('hrsh7th/nvim-cmp')
 Plug('hrsh7th/cmp-nvim-lsp')
+Plug('RRethy/vim-illuminate')
 
 Plug('m4xshen/autoclose.nvim')
 Plug('famiu/bufdelete.nvim')
@@ -173,6 +174,10 @@ lspconfig.pyright.setup(lspSetup)
 lspconfig.ts_ls.setup(lspSetup)
 lspconfig.rust_analyzer.setup(lspSetup)
 
+vim.cmd('hi def IlluminatedWordText gui=bold,underline')
+vim.cmd('hi def IlluminatedWordRead gui=bold,underline')
+vim.cmd('hi def IlluminatedWordWrite gui=bold,underline')
+
 
 
 
@@ -181,6 +186,35 @@ require('autoclose').setup({
     pair_spaces = true
   }
 })
+
+
+
+
+function TabLineCell(i)
+  local isSelected = vim.fn.tabpagenr() == i
+  local buflist = vim.fn.tabpagebuflist(i)
+  local winnr = vim.fn.tabpagewinnr(i)
+  local bufnr = buflist[winnr]
+  local hl = (isSelected and '%#TabLineSel#' or '%#TabLine#')
+
+  local name = vim.fn.bufname(bufnr)
+  if name == '' then
+    name = '[No Name]'
+  end
+
+  local modified = vim.fn.getbufvar(bufnr, '&modified') == 1 and '[+] ' or ''
+
+  return hl .. '%' .. i .. 'T' .. ' ' .. name .. modified .. ' '
+end
+function TabLine()
+  local line = ''
+  for i = 1, vim.fn.tabpagenr('$'), 1 do
+    line = line .. TabLineCell(i)
+  end
+  line = line .. '%#TabLineFill#%='
+  return line
+end
+vim.opt.tabline = '%!v:lua.TabLine()'
 
 
 
