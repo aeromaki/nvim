@@ -8,13 +8,16 @@ Plug('aeromaki/TripleBaka.nvim')
 Plug('nvim-lualine/lualine.nvim')
 
 Plug('neovim/nvim-lspconfig')
-Plug('nvim-treesitter/nvim-treesitter')
+Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
 Plug('hrsh7th/nvim-cmp')
 Plug('hrsh7th/cmp-nvim-lsp')
+Plug('hrsh7th/cmp-path')
 Plug('RRethy/vim-illuminate')
 
 Plug('m4xshen/autoclose.nvim')
 Plug('famiu/bufdelete.nvim')
+
+Plug('benlubas/molten-nvim', { ['do'] = ':UpdateRemotePlugins' })
 
 vim.call('plug#end')
 
@@ -133,7 +136,8 @@ cmp.setup({
     ['<CR>'] = cmp_f(cmp.mapping.confirm({ select = true }))
   }),
   sources = {
-    { name = 'nvim_lsp' }
+    { name = 'nvim_lsp' },
+    { name = 'path' }
   }
 })
 
@@ -147,6 +151,7 @@ lspconfig.vimls.setup(lspSetup)
 lspconfig.pyright.setup(lspSetup)
 lspconfig.ts_ls.setup(lspSetup)
 lspconfig.rust_analyzer.setup(lspSetup)
+lspconfig.r_language_server.setup(lspSetup)
 
 vim.cmd('hi def IlluminatedWordText gui=bold,underline')
 vim.cmd('hi def IlluminatedWordRead gui=bold,underline')
