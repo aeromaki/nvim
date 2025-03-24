@@ -1,14 +1,11 @@
 local vim = vim
 local Plug = vim.fn['plug#']
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 
 vim.call('plug#begin')
 
 Plug('rktjmp/lush.nvim')
 Plug('aeromaki/TripleBaka.nvim')
 Plug('nvim-lualine/lualine.nvim')
-Plug('nvim-tree/nvim-tree.lua')
 
 Plug('neovim/nvim-lspconfig')
 Plug('nvim-treesitter/nvim-treesitter')
@@ -94,29 +91,6 @@ require('lualine').setup({
     },
     lualine_z = {
       'location'
-    }
-  }
-})
-
-require('nvim-tree').setup({
-  sort = {
-    sorter = 'case_sensitive'
-  },
-  filters = {
-    dotfiles = false
-  },
-  renderer = {
-    icons = {
-      show = {
-        file = false,
-        folder = false,
-        folder_arrow = false,
-        git = false,
-        modified = false,
-        hidden = false,
-        diagnostics = false,
-        bookmarks = false
-      }
     }
   }
 })
@@ -229,6 +203,10 @@ vim.opt.laststatus = 3
 vim.opt.clipboard = "unnamedplus"
 vim.o.termguicolors = true
 
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 20
+vim.g.netrw_liststyle = 3
+
 
 
 vim.keymap.set('i', '<C-s>c', '', { callback = cmp.complete })
@@ -237,7 +215,7 @@ vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>q', '<Esc>:tabnew<CR>')
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>r', '<Esc>:tabclose<CR>')
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>w', '<Esc>:tabprevious<CR>')
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>e', '<Esc>:tabnext<CR>')
-vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>t', '<Esc>:NvimTreeToggle<CR>')
+vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>t', '<Esc>:Lexplore<CR>')
 vim.cmd('cnoreabbrev W w')
 vim.cmd('cnoreabbrev bdd bd')
 vim.cmd('cnoreabbrev bd Bd')
