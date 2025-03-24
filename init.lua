@@ -227,7 +227,7 @@ vim.opt.cursorline = true
 vim.opt.scl = 'no'
 vim.opt.laststatus = 3
 vim.opt.clipboard = "unnamedplus"
-
+vim.o.termguicolors = true
 
 
 
