@@ -1,10 +1,14 @@
 local vim = vim
 local Plug = vim.fn['plug#']
 
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 vim.call('plug#begin')
 
+Plug('nvim-tree/nvim-tree.lua')
 Plug('rktjmp/lush.nvim')
-Plug('aeromaki/TripleBaka.nvim')
+Plug('rxils/triplebaka.nvim')
 Plug('nvim-lualine/lualine.nvim')
 
 Plug('neovim/nvim-lspconfig')
@@ -24,52 +28,30 @@ vim.call('plug#end')
 
 
 
-vim.cmd('colorscheme TripleBaka')
+vim.cmd('colorscheme triplebaka')
 
-local colors = {
-  white = '#ffffff',
-  black = '#323232',
-  lightgray = '#eeeeee',
-  gray = '#dddddd',
-  red = '#e24673',
-  yellow = '#ffd543',
-  blue = '#39c5bb'
-}
+require("nvim-tree").setup({
+  renderer = {
+    icons = {
+      show = {
+        file = false,
+        folder = false,
+        folder_arrow = false,
+        git = false,
+        modified = false,
+        hidden = false,
+        diagnostics = false,
+        bookmarks = false
+      }
+    }
+  }
+})
 
-local lualine_b = { bg = colors.lightgray, fg = colors.black }
-local lualine_c = { bg = colors.gray, fg = colors.black }
-
-local theme = {
-  normal = {
-    a = { bg = colors.blue, fg = colors.black, gui = 'bold' },
-    b = lualine_b, c = lualine_c
-  },
-  insert = {
-    a = { bg = colors.yellow, fg = colors.black, gui = 'bold' },
-    b = lualine_b, c = lualine_c
-  },
-  visual = {
-    a = { bg = colors.blue, fg = colors.black, gui = 'bold' },
-    b = lualine_b, c = lualine_c
-  },
-  replace = {
-    a = { bg = colors.yellow, fg = colors.black, gui = 'bold' },
-    b = lualine_b, c = lualine_c
-  },
-  command = {
-    a = { bg = colors.red, fg = colors.black, gui = 'bold' },
-    b = lualine_b, c = lualine_c
-  },
-  inactive = {
-    a = { bg = colors.red, fg = colors.black, gui = 'bold' },
-    b = lualine_b, c = lualine_c
-  },
-}
 
 require('lualine').setup({
   options = {
     icons_enabled = false,
-    theme = theme,
+    theme = 'auto',
     component_separators = { left = '', right = '' },
     section_separators = { left = '', right = '' },
     globalstatus = true,
@@ -152,6 +134,7 @@ lspconfig.pyright.setup(lspSetup)
 lspconfig.ts_ls.setup(lspSetup)
 lspconfig.rust_analyzer.setup(lspSetup)
 lspconfig.r_language_server.setup(lspSetup)
+lspconfig.julials.setup(lspSetup)
 
 vim.cmd('hi def IlluminatedWordText gui=bold,underline')
 vim.cmd('hi def IlluminatedWordRead gui=bold,underline')
@@ -220,10 +203,14 @@ vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>q', '<Esc>:tabnew<CR>')
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>r', '<Esc>:tabclose<CR>')
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>w', '<Esc>:tabprevious<CR>')
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>e', '<Esc>:tabnext<CR>')
-vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>t', '<Esc>:Lexplore<CR>')
+--vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', '<Esc>:Lexplore<CR>')
+vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', '<Esc>:NvimTreeToggle<CR>')
 vim.cmd('cnoreabbrev W w')
 vim.cmd('cnoreabbrev bdd bd')
 vim.cmd('cnoreabbrev bd Bd')
 vim.cmd('cnoreabbrev bww bw')
 vim.cmd('cnoreabbrev bw Bw')
+vim.keymap.set("n", "<localleader>mi", ":MoltenInit<CR>", { silent = true })
+vim.keymap.set("n", "<localleader>r", ":MoltenEvaluateLine<CR>", { silent = true })
+vim.keymap.set("v", "<localleader>r", ":<C-u>MoltenEvaluateVisual<CR>gv", { silent = true })
 
