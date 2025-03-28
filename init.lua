@@ -17,7 +17,8 @@ vim.call('plug#begin')
 
 Plug('nvim-tree/nvim-tree.lua')
 Plug('rktjmp/lush.nvim')
-Plug('rxils/triplebaka.nvim')
+--Plug('rxils/triplebaka.nvim')
+Plug('nyoom-engineering/oxocarbon.nvim')
 Plug('nvim-lualine/lualine.nvim')
 
 Plug('neovim/nvim-lspconfig')
@@ -37,7 +38,8 @@ vim.call('plug#end')
 
 
 
-vim.cmd('colorscheme triplebaka')
+--vim.cmd('colorscheme triplebaka')
+vim.cmd('colorscheme oxocarbon')
 
 require("nvim-tree").setup({
   renderer = {
@@ -203,6 +205,8 @@ vim.o.termguicolors = true
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 20
 vim.g.netrw_liststyle = 3
+
+vim.diagnostic.config({ virtual_text = false })
 
 
 
