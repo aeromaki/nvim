@@ -18,7 +18,7 @@ vim.call('plug#begin')
 Plug('nvim-tree/nvim-tree.lua')
 Plug('rktjmp/lush.nvim')
 --Plug('rxils/triplebaka.nvim')
-Plug('nyoom-engineering/oxocarbon.nvim')
+Plug('rxils/triplebaka-dark')
 Plug('nvim-lualine/lualine.nvim')
 
 Plug('neovim/nvim-lspconfig')
@@ -39,7 +39,7 @@ vim.call('plug#end')
 
 
 --vim.cmd('colorscheme triplebaka')
-vim.cmd('colorscheme oxocarbon')
+vim.cmd('colorscheme triplebaka-dark')
 
 require("nvim-tree").setup({
   renderer = {
@@ -63,7 +63,7 @@ require('lualine').setup({
   options = {
     icons_enabled = false,
     theme = 'auto',
-    component_separators = { left = '', right = '' },
+    component_separators = { left = ' ', right = ' ' },
     section_separators = { left = '', right = '' },
     globalstatus = true,
     --always_divide_middle = false
