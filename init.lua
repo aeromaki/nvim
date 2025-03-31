@@ -23,8 +23,6 @@ Plug('RRethy/vim-illuminate')
 Plug('m4xshen/autoclose.nvim')
 Plug('famiu/bufdelete.nvim')
 
---Plug('benlubas/molten-nvim', { ['do'] = ':UpdateRemotePlugins' })
-
 vim.call('plug#end')
 
 
