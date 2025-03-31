@@ -20,7 +20,7 @@ Plug('hrsh7th/cmp-nvim-lsp')
 Plug('hrsh7th/cmp-path')
 Plug('RRethy/vim-illuminate')
 
-Plug('m4xshen/autoclose.nvim')
+Plug('jiangmiao/auto-pairs')
 Plug('famiu/bufdelete.nvim')
 
 vim.call('plug#end')
@@ -144,15 +144,6 @@ vim.cmd('hi def IlluminatedWordWrite gui=bold,underline')
 
 
 
-require('autoclose').setup({
-  options = {
-    pair_spaces = true
-  }
-})
-
-
-
-
 function TabLineCell(i)
   local isSelected = vim.fn.tabpagenr() == i
   local buflist = vim.fn.tabpagebuflist(i)
@@ -213,7 +204,3 @@ vim.cmd('cnoreabbrev bdd bd')
 vim.cmd('cnoreabbrev bd Bd')
 vim.cmd('cnoreabbrev bww bw')
 vim.cmd('cnoreabbrev bw Bw')
-vim.keymap.set("n", "<localleader>mi", ":MoltenInit<CR>", { silent = true })
-vim.keymap.set("n", "<localleader>r", ":MoltenEvaluateLine<CR>", { silent = true })
-vim.keymap.set("v", "<localleader>r", ":<C-u>MoltenEvaluateVisual<CR>gv", { silent = true })
-
