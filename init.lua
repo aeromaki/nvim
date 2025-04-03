@@ -20,8 +20,9 @@ Plug('hrsh7th/cmp-nvim-lsp')
 Plug('hrsh7th/cmp-path')
 Plug('RRethy/vim-illuminate')
 
-Plug('jiangmiao/auto-pairs')
+Plug('windwp/nvim-autopairs')
 Plug('famiu/bufdelete.nvim')
+Plug('lukas-reineke/indent-blankline.nvim')
 
 vim.call('plug#end')
 
@@ -142,6 +143,28 @@ vim.cmd('hi def IlluminatedWordRead gui=bold,underline')
 vim.cmd('hi def IlluminatedWordWrite gui=bold,underline')
 
 
+require('nvim-autopairs').setup({})
+
+local hooks = require('ibl.hooks')
+hooks.register(hooks.type.HIGHLIGHT_SETUP, function ()
+  vim.api.nvim_set_hl(0, "BlankLine", { fg = "#262626" })
+  vim.api.nvim_set_hl(0, "BlankLineScope", { fg = "#39c5bb" })
+end)
+
+require('ibl').setup({
+  indent = {
+    highlight = {
+      "BlankLine"
+    }
+  },
+  scope = { 
+    highlight = {
+      "BlankLineScope"
+    }
+  }
+})
+
+
 
 
 function TabLineCell(i)
@@ -181,6 +204,7 @@ vim.opt.cursorline = true
 vim.opt.scl = 'no'
 vim.opt.laststatus = 3
 vim.opt.clipboard = "unnamedplus"
+vim.opt.colorcolumn = "80"
 vim.o.termguicolors = true
 
 vim.g.netrw_banner = 0
@@ -191,7 +215,8 @@ vim.diagnostic.config({ virtual_text = false })
 
 
 
-vim.keymap.set('i', '<C-s>c', '', { callback = cmp.complete })
+vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>d', '', { callback = vim.diagnostic.goto_next })
+vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>s', '', { callback = vim.diagnostic.goto_prev })
 
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>q', '<Esc>:tabnew<CR>')
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>r', '<Esc>:tabclose<CR>')
