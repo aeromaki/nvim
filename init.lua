@@ -148,7 +148,6 @@ require('nvim-autopairs').setup({})
 local hooks = require('ibl.hooks')
 hooks.register(hooks.type.HIGHLIGHT_SETUP, function ()
   vim.api.nvim_set_hl(0, "BlankLine", { fg = "#262626" })
-  vim.api.nvim_set_hl(0, "BlankLineScope", { fg = "#39c5bb" })
 end)
 
 require('ibl').setup({
@@ -157,10 +156,8 @@ require('ibl').setup({
       "BlankLine"
     }
   },
-  scope = { 
-    highlight = {
-      "BlankLineScope"
-    }
+  scope = {
+    enabled = false,
   }
 })
 
