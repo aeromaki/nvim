@@ -23,6 +23,7 @@ Plug('RRethy/vim-illuminate')
 Plug('windwp/nvim-autopairs')
 Plug('famiu/bufdelete.nvim')
 Plug('lukas-reineke/indent-blankline.nvim')
+Plug('HiPhish/rainbow-delimiters.nvim')
 
 vim.call('plug#end')
 
@@ -86,9 +87,9 @@ require('lualine').setup({
 
 
 require('nvim-treesitter.configs').setup({
-  ensure_installed = 'all',
+  --ensure_installed = 'all',
   sync_install = false,
-  auto_install = true,
+  --auto_install = true,
   highlight = {
     enable = true
   },
@@ -145,11 +146,21 @@ vim.cmd('hi def IlluminatedWordWrite gui=bold,underline')
 
 require('nvim-autopairs').setup({})
 
+local rainbowHighlight = {
+  "RainbowYellow",
+  "RainbowRed",
+  "RainbowBlue",
+}
+
 local hooks = require('ibl.hooks')
 hooks.register(hooks.type.HIGHLIGHT_SETUP, function ()
   vim.api.nvim_set_hl(0, "BlankLine", { fg = "#262626" })
+  vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#e24673" })
+  vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#ffc800" })
+  vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#39c5bb" })
 end)
 
+vim.g.rainbow_delimiters = { highlight = rainbowHighlight }
 require('ibl').setup({
   indent = {
     highlight = {
@@ -212,8 +223,10 @@ vim.diagnostic.config({ virtual_text = false })
 
 
 
-vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>d', '', { callback = vim.diagnostic.goto_next })
-vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>s', '', { callback = vim.diagnostic.goto_prev })
+vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>d', '',
+  { callback = vim.diagnostic.goto_next })
+vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>s', '',
+  { callback = vim.diagnostic.goto_prev })
 
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>q', '<Esc>:tabnew<CR>')
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-q>r', '<Esc>:tabclose<CR>')
