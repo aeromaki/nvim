@@ -8,9 +8,8 @@ vim.g.loaded_netrwPlugin = 1
 vim.call('plug#begin')
 
 Plug('nvim-tree/nvim-tree.lua')
-Plug('rktjmp/lush.nvim')
---Plug('rxils/triplebaka.nvim')
-Plug('rxils/triplebaka-dark')
+--Plug('rktjmp/lush.nvim')
+--Plug('rxils/triplebaka-dark')
 Plug('nvim-lualine/lualine.nvim')
 
 Plug('neovim/nvim-lspconfig')
@@ -28,10 +27,8 @@ Plug('HiPhish/rainbow-delimiters.nvim')
 vim.call('plug#end')
 
 
-
-
---vim.cmd('colorscheme triplebaka')
-vim.cmd('colorscheme triplebaka-dark')
+local vimrc = vim.fn.stdpath('config') .. '/theme.vim'
+vim.cmd.source(vimrc)
 
 require("nvim-tree").setup({
   renderer = {
@@ -54,7 +51,7 @@ require("nvim-tree").setup({
 require('lualine').setup({
   options = {
     icons_enabled = false,
-    theme = 'auto',
+    theme = require('./theme-lualine'),
     component_separators = { left = ' ', right = ' ' },
     section_separators = { left = '', right = '' },
     globalstatus = true,
@@ -113,8 +110,6 @@ cmp.setup({
     end
   },
   mapping = cmp.mapping.preset.insert({
-    --['<C-j>'] = cmp_f(cmp.mapping.scroll_docs(-4)),
-    --['<C-k>'] = cmp_f(cmp.mapping.scroll_docs(4)),
     ['<Tab>'] = cmp_f(cmp.mapping.select_next_item()),
     ['<S-Tab>'] = cmp_f(cmp.mapping.select_prev_item()),
     ['<C-q>'] = cmp_f(cmp.mapping.abort()),
@@ -149,18 +144,19 @@ require('nvim-autopairs').setup({})
 local rainbowHighlight = {
   "RainbowYellow",
   "RainbowRed",
-  "RainbowBlue",
+  "RainbowGreen",
 }
 
 local hooks = require('ibl.hooks')
 hooks.register(hooks.type.HIGHLIGHT_SETUP, function ()
-  vim.api.nvim_set_hl(0, "BlankLine", { fg = "#262626" })
-  vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#e24673" })
-  vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#ffc800" })
-  vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#39c5bb" })
+  vim.api.nvim_set_hl(0, "BlankLine", { ctermfg = 'DarkGray' })
+  vim.api.nvim_set_hl(0, "RainbowRed", { ctermfg = 'Red' })
+  vim.api.nvim_set_hl(0, "RainbowYellow", { ctermfg = 'Yellow' })
+  vim.api.nvim_set_hl(0, "RainbowGreen", { ctermfg = 'Green' })
 end)
 
 vim.g.rainbow_delimiters = { highlight = rainbowHighlight }
+
 require('ibl').setup({
   indent = {
     highlight = {
@@ -213,7 +209,7 @@ vim.opt.scl = 'no'
 vim.opt.laststatus = 3
 vim.opt.clipboard = "unnamedplus"
 vim.opt.colorcolumn = "80"
-vim.o.termguicolors = true
+--vim.o.termguicolors = true
 
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 20
