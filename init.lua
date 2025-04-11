@@ -149,10 +149,10 @@ local rainbowHighlight = {
 
 local hooks = require('ibl.hooks')
 hooks.register(hooks.type.HIGHLIGHT_SETUP, function ()
-  vim.api.nvim_set_hl(0, "BlankLine", { ctermfg = 'DarkGray' })
-  vim.api.nvim_set_hl(0, "RainbowRed", { ctermfg = 'Red' })
-  vim.api.nvim_set_hl(0, "RainbowYellow", { ctermfg = 'Yellow' })
-  vim.api.nvim_set_hl(0, "RainbowGreen", { ctermfg = 'Green' })
+  vim.api.nvim_set_hl(0, "BlankLine", { ctermfg = 8 })
+  vim.api.nvim_set_hl(0, "RainbowRed", { ctermfg = 9 })
+  vim.api.nvim_set_hl(0, "RainbowYellow", { ctermfg = 11 })
+  vim.api.nvim_set_hl(0, "RainbowGreen", { ctermfg = 10 })
 end)
 
 vim.g.rainbow_delimiters = { highlight = rainbowHighlight }

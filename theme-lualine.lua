@@ -1,16 +1,16 @@
 local line = function (color_a)
   return {
-    a = { bg = color_a, fg = 'Black', gui = 'bold' },
-    b = { bg = 'Gray', fg = 'Black' },
-    c = { bg = 'DarkGray', fg = 'Black' }
+    a = { bg = color_a, fg = 0, gui = 'bold' },
+    b = { bg = 8, fg = 255 },
+    c = { bg = 7, fg = 255 }
   }
 end
 
 return {
-  normal = line('Green'),
-  insert = line('Yellow'),
-  visual = line('Green'),
-  replace = line('Yellow'),
-  command = line('Red'),
-  inactive = line('Red')
+  normal = line(10),
+  insert = line(11),
+  visual = line(10),
+  replace = line(11),
+  command = line(9),
+  inactive = line(9)
 }

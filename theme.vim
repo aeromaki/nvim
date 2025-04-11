@@ -11,26 +11,26 @@ set notermguicolors
 hi Normal         ctermfg=White
 hi Title          ctermfg=White cterm=bold
 "hi NormalNC
-hi Comment        ctermfg=Gray
-hi Conceal        ctermfg=Gray
-hi Whitespace     ctermfg=Gray
-hi NonText        ctermfg=Gray
+hi Comment        ctermfg=7
+hi Conceal        ctermfg=7
+hi Whitespace     ctermfg=7
+hi NonText        ctermfg=7
 
-hi CursorLine     ctermbg=DarkGray
-hi CursorColumn   ctermbg=DarkGray
-hi ColorColumn    ctermbg=DarkGray cterm=NONE
+hi CursorLine     ctermbg=8
+hi CursorColumn   ctermbg=8
+hi ColorColumn    ctermbg=8 cterm=NONE
 
-hi LineNr         ctermfg=DarkGray
-hi LineNrAbove    ctermfg=DarkGray
-hi LineNrBelow    ctermfg=DarkGray
-hi CursorLineFold ctermfg=DarkGray
-hi CursorLineSign ctermfg=DarkGray
-hi EndOfBuffer    ctermfg=DarkGray
-hi CursorLineNr   ctermfg=Gray cterm=bold 
+hi LineNr         ctermfg=8
+hi LineNrAbove    ctermfg=8
+hi LineNrBelow    ctermfg=8
+hi CursorLineFold ctermfg=8
+hi CursorLineSign ctermfg=8
+hi EndOfBuffer    ctermfg=8
+hi CursorLineNr   ctermfg=7 cterm=bold 
 
 hi Cursor         cterm=reverse
 hi TermCursor     cterm=reverse
-hi TermCursorNC   ctermbg=DarkGray ctermfg=Black cterm=NONE
+hi TermCursorNC   ctermbg=8 ctermfg=Black cterm=NONE
 hi lCursor        cterm=reverse
 "CursorIM
 
@@ -52,10 +52,10 @@ hi Pmenu          ctermbg=Black ctermfg=White cterm=NONE
 hi PmenuSel       ctermbg=Green ctermfg=Black cterm=NONE
 "PmenuKindSel
 "PmenuExtraSel
-hi PmenuThumb     ctermfg=Gray
+hi PmenuThumb     ctermfg=7
 
 hi StatusLine     ctermbg=White ctermfg=Black cterm=NONE
-hi StatusLineNC   ctermbg=DarkGray ctermfg=Black cterm=NONE
+hi StatusLineNC   ctermbg=8 ctermfg=Black cterm=NONE
 hi TabLine        ctermbg=NONE ctermfg=White
 hi TabLineSel     ctermbg=NONE ctermfg=Green
 "hi TabLineFill
@@ -73,9 +73,9 @@ hi WildMenu       ctermbg=Green ctermfg=Black
 hi Winseparator   ctermfg=White
 "hi VertSplit
 
-hi Folded         ctermfg=DarkGray
-hi FoldColumn     ctermfg=DarkGray
-hi SignColumn     ctermfg=DarkGray
+hi Folded         ctermfg=8
+hi FoldColumn     ctermfg=8
+hi SignColumn     ctermfg=8
 
 hi SpecialKey     ctermfg=White cterm=italic,underline
 hi SpellBad       ctermfg=White cterm=italic,underline
