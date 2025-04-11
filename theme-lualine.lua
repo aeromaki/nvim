@@ -1,6 +1,6 @@
 local line = function (color_a)
   return {
-    a = { bg = color_a, fg = 'Black' },
+    a = { bg = color_a, fg = 'Black', gui = 'bold' },
     b = { bg = 'Gray', fg = 'Black' },
     c = { bg = 'DarkGray', fg = 'Black' }
   }
