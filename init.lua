@@ -24,22 +24,28 @@ Plug('famiu/bufdelete.nvim')
 Plug('lukas-reineke/indent-blankline.nvim')
 Plug('HiPhish/rainbow-delimiters.nvim')
 
+Plug('f-person/auto-dark-mode.nvim')
+
 vim.call('plug#end')
 
 
 
 
-vim.g.theme_state = 1
-
 local theme = require('theme')
-theme.set_theme(vim.g.theme_state)
-theme.set_plugins(vim.g.theme_state)
 
-vim.api.nvim_create_user_command('Tgt', function ()
-  vim.g.theme_state = 1 - vim.g.theme_state
-  theme.set_theme(vim.g.theme_state)
-  theme.set_plugins(vim.g.theme_state)
-end, {})
+local set_theme = function (dark)
+  theme.set_theme(dark)
+  theme.set_plugins(dark)
+end
+
+require('auto-dark-mode').setup({
+  set_dark_mode = function ()
+    set_theme(1)
+  end,
+  set_light_mode = function ()
+    set_theme(0)
+  end
+})
 
 
 
