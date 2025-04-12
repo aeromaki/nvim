@@ -27,8 +27,22 @@ Plug('HiPhish/rainbow-delimiters.nvim')
 vim.call('plug#end')
 
 
-local vimrc = vim.fn.stdpath('config') .. '/theme.vim'
-vim.cmd.source(vimrc)
+
+
+vim.g.theme_state = 1
+
+local theme = require('theme')
+theme.set_theme(vim.g.theme_state)
+theme.set_plugins(vim.g.theme_state)
+
+vim.api.nvim_create_user_command('Tgt', function ()
+  vim.g.theme_state = 1 - vim.g.theme_state
+  theme.set_theme(vim.g.theme_state)
+  theme.set_plugins(vim.g.theme_state)
+end, {})
+
+
+
 
 require("nvim-tree").setup({
   renderer = {
@@ -43,39 +57,6 @@ require("nvim-tree").setup({
         diagnostics = false,
         bookmarks = false
       }
-    }
-  }
-})
-
-
-require('lualine').setup({
-  options = {
-    icons_enabled = false,
-    theme = require('./theme-lualine'),
-    component_separators = { left = ' ', right = ' ' },
-    section_separators = { left = '', right = '' },
-    globalstatus = true,
-    --always_divide_middle = false
-  },
-  sections = {
-    lualine_b = {
-      'branch',
-      --'diff'
-    },
-    lualine_c = {{
-      'filename',
-      file_status = true,
-      path = 2
-    }},
-    lualine_x = {
-      'filetype'
-    },
-    lualine_y = {
-      'diagnostics',
-      --'lsp_status'
-    },
-    lualine_z = {
-      'location'
     }
   }
 })
@@ -141,32 +122,11 @@ vim.cmd('hi def IlluminatedWordWrite gui=bold,underline')
 
 require('nvim-autopairs').setup({})
 
-local rainbowHighlight = {
+vim.g.rainbow_delimiters = { highlight = {
   "RainbowYellow",
   "RainbowRed",
   "RainbowGreen",
-}
-
-local hooks = require('ibl.hooks')
-hooks.register(hooks.type.HIGHLIGHT_SETUP, function ()
-  vim.api.nvim_set_hl(0, "BlankLine", { ctermfg = 8 })
-  vim.api.nvim_set_hl(0, "RainbowRed", { ctermfg = 9 })
-  vim.api.nvim_set_hl(0, "RainbowYellow", { ctermfg = 11 })
-  vim.api.nvim_set_hl(0, "RainbowGreen", { ctermfg = 10 })
-end)
-
-vim.g.rainbow_delimiters = { highlight = rainbowHighlight }
-
-require('ibl').setup({
-  indent = {
-    highlight = {
-      "BlankLine"
-    }
-  },
-  scope = {
-    enabled = false,
-  }
-})
+}}
 
 
 
