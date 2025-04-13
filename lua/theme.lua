@@ -262,6 +262,8 @@ local set_plugins = function (dark)
   vim.api.nvim_set_hl(0, 'RainbowRed',    { ctermfg = c.red })
   vim.api.nvim_set_hl(0, 'RainbowYellow', { ctermfg = c.yellow })
   vim.api.nvim_set_hl(0, 'RainbowGreen',  { ctermfg = c.green })
+
+  vim.api.nvim_set_hl(0, 'NvimTreeWindowPicker', { ctermbg = c.blue, ctermfg = c.white })
 end
 
 
