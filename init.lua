@@ -140,6 +140,7 @@ cmp.setup({
 })
 
 local default_lsp_setup = {
+  silent = true,
   capabilities = require('cmp_nvim_lsp').default_capabilities()
 }
 local lsp_setup = function (config)
