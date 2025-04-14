@@ -139,18 +139,36 @@ cmp.setup({
   }
 })
 
-local lspSetup = {
+local default_lsp_setup = {
   capabilities = require('cmp_nvim_lsp').default_capabilities()
 }
+local lsp_setup = function (config)
+  for k, v in pairs(default_lsp_setup) do
+    config[k] = v
+  end
+  return config
+end
 
 local lspconfig = require('lspconfig')
-lspconfig.lua_ls.setup(lspSetup)
-lspconfig.vimls.setup(lspSetup)
-lspconfig.pyright.setup(lspSetup)
-lspconfig.ts_ls.setup(lspSetup)
-lspconfig.rust_analyzer.setup(lspSetup)
-lspconfig.r_language_server.setup(lspSetup)
-lspconfig.julials.setup(lspSetup)
+lspconfig.lua_ls.setup(lsp_setup({}))
+lspconfig.vimls.setup(lsp_setup({}))
+
+lspconfig.bashls.setup(lsp_setup({}))
+
+lspconfig.pyright.setup(lsp_setup({}))
+lspconfig.ruby_lsp.setup(lsp_setup({
+  init_options = {
+    formatter = 'standard',
+    linters = { 'standard' }
+  }
+}))
+
+lspconfig.ts_ls.setup(lsp_setup({}))
+
+lspconfig.rust_analyzer.setup(lsp_setup({}))
+
+lspconfig.r_language_server.setup(lsp_setup({}))
+lspconfig.julials.setup(lsp_setup({}))
 
 vim.cmd('hi def IlluminatedWordText gui=bold,underline')
 vim.cmd('hi def IlluminatedWordRead gui=bold,underline')
